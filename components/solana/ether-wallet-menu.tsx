@@ -12,8 +12,9 @@ import { useWalletModal } from './components/useWalletModal';
 
 
 
-export const WalletMenu = () => {
-console.log("solana wallet");
+export const EtherWalletMenu = () => {
+    console.log("ether wallet");
+
     const { wallets, select } = useWallet();
     const { setVisible } = useWalletModal();
     const [expanded, setExpanded] = useState(false);

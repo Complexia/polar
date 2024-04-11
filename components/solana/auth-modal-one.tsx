@@ -6,6 +6,8 @@ import { IconGitHub, IconGoogle, IconOpenAI, PhantomIcon, SocialsIcon, SolanaIco
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/registry/new-york/ui/tabs";
 import { LoginButtonGoogle } from "../auth/googleLogin";
 import { WalletMenu } from './wallet-menu';
+import { EtherWalletMenu } from './ether-wallet-menu';
+import { BinanceWalletMenu } from './binance-wallet-menu';
 import { useWallet } from '@solana/wallet-adapter-react';
 import { WalletMultiButton } from '@solana/wallet-adapter-react-ui';
 
@@ -80,7 +82,17 @@ const AuthModal = () => {
                                             </TabsTrigger>
                                             <TabsTrigger value="phantom">
                                                 <button className="btn btn-active btn-neutral min-w-44 w-full justify-start">
-                                                    <SolanaIcon />Solana
+                                                    <SolanaIcon className="-ml-1" />Solana
+                                                </button>
+                                            </TabsTrigger>
+                                            <TabsTrigger value="ethereum">
+                                                <button className="btn btn-active btn-neutral min-w-44 w-full justify-start pl-2">
+                                                    <img src="https://cryptologos.cc/logos/versions/ethereum-eth-logo-diamond.svg?v=031" alt="Ethereum Logo" className="h-6 w-6 -ml-0.5" />Ethereum
+                                                </button>
+                                            </TabsTrigger>
+                                            <TabsTrigger value="binance">
+                                                <button className="btn btn-active btn-neutral min-w-44 w-full justify-start pl-2">
+                                                    <img src="https://cryptologos.cc/logos/bnb-bnb-logo.svg?v=031" alt="Ethereum Logo" className="h-6 w-6 -ml-0.5" />Binance
                                                 </button>
                                             </TabsTrigger>
                                         </div>
@@ -108,6 +120,12 @@ const AuthModal = () => {
                                         </TabsContent>
                                         <TabsContent value="phantom" className="items-center">
                                             <WalletMenu />
+                                        </TabsContent>
+                                        <TabsContent value="ethereum" className="items-center">
+                                            <EtherWalletMenu />
+                                        </TabsContent>
+                                        <TabsContent value="binance" className="items-center">
+                                            <BinanceWalletMenu />
                                         </TabsContent>
                                     </div>
                                 </div>
