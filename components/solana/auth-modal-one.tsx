@@ -6,7 +6,7 @@ import { IconGitHub, IconGoogle, IconOpenAI, PhantomIcon, SocialsIcon, SolanaIco
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/registry/new-york/ui/tabs";
 import { LoginButtonGoogle } from "../auth/googleLogin";
 import { WalletMenu } from './wallet-menu';
-import { EtherWalletMenu } from './ether-wallet-menu';
+import EtherWalletMenu from "./ether-wallet-menu";
 import { BinanceWalletMenu } from './binance-wallet-menu';
 import { useWallet } from '@solana/wallet-adapter-react';
 import { WalletMultiButton } from '@solana/wallet-adapter-react-ui';

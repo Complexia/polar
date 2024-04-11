@@ -20,6 +20,9 @@ export const BinanceWalletMenu = () => {
     const [expanded, setExpanded] = useState(false);
     const [fadeIn, setFadeIn] = useState(false);
 
+    //test
+    console.log("this is wallet ",wallets);
+    //end.
 
     const [listedWallets, collapsedWallets] = useMemo(() => {
         const installed: Wallet[] = [];
