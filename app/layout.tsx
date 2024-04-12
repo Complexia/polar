@@ -20,10 +20,12 @@ export default function RootLayout({
   return (
     <html lang="en" className={GeistSans.className}>
       <body className="bg-background text-foreground">
-        <ClientWalletProvider>
-        
-          {children}
-        </ClientWalletProvider>
+        <main className="w-screen h-screen">
+          <ClientWalletProvider>
+
+            {children}
+          </ClientWalletProvider>
+        </main>
       </body>
     </html>
   );

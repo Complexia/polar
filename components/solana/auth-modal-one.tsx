@@ -54,7 +54,7 @@ const AuthModal = () => {
                         modal.showModal();
                     }
                 }}>
-                    <div>Login</div>
+                    <div>Connect wallet</div>
                 </button>
 
             )}
