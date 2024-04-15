@@ -12,6 +12,8 @@ const RegisterProject = () => {
 
 
     const handleCreateProject = async () => {
+        //save to filecoin, mint an nft that contains the id/name/address 
+        // of the project to the user's wallet
         console.log("Creating project on filecoin")
 
     }
