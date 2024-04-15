@@ -6,6 +6,7 @@ import { Button } from "@/registry/new-york/ui/button";
 import { createClient } from '@/utils/supabase/client'
 import { Avatar, AvatarImage } from "@/registry/new-york/ui/avatar";
 import { v4 as uuidv4 } from 'uuid'
+import { set } from "react-hook-form";
 
 const RegisterProject = () => {
 
@@ -15,11 +16,27 @@ const RegisterProject = () => {
         //save to filecoin, mint an nft that contains the id/name/address 
         // of the project to the user's wallet
         console.log("Creating project on filecoin")
+        let project_id = uuidv4();
+        let project = {
+            project_id,
+            project_name,
+            scope,
+            description,
+            redirect_url
+        }
+        console.log(project)
 
+        //const hash = crypto.getRandomValues(new Uint8Array(42)).toString();
+        let hash = crypto.getRandomValues(new Uint8Array(42))
+            .reduce((acc, i) => acc + ('0' + i.toString(16)).slice(-2), '');
+
+        setSecret(hash);
+        setFinished(true);
     }
 
 
-
+    const [finished, setFinished] = useState(false);
+    const [secret, setSecret] = useState("");
     const [loading, setLoading] = useState(false);
     const [project_name, setProjectName] = useState("");
     const [scope, setScope] = useState("");
@@ -66,6 +83,16 @@ const RegisterProject = () => {
 
             </div>
 
+            {finished && (
+                <div className="py-4 flex flex-col">
+                    <span className="label-text pb-1">Copy the project secret.</span>
+                    <code>{finished ? secret : ""}</code>
+
+                </div>
+
+            )}
+
+
 
             <div className="flex  ">
 
@@ -74,7 +101,8 @@ const RegisterProject = () => {
                 </div>
 
 
-                <div className="modal-action">
+
+                <div className="mt-6">
                     <form method="dialog">
                         {/* if there is a button in form, it will close the modal */}
                         <button className="btn">Cancel</button>

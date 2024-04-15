@@ -44,6 +44,7 @@
     "class-variance-authority": "^0.7.0",
     "clsx": "^2.1.0",
     "cmdk": "^1.0.0",
+    "crypto": "^1.0.1",
     "daisyui": "latest",
     "embla-carousel-react": "^8.0.2",
     "geist": "^1.2.1",
