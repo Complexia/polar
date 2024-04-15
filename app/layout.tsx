@@ -2,6 +2,7 @@ import { GeistSans } from "geist/font/sans";
 import "./globals.css";
 import ClientWalletProvider from "@/components/solana/contexts/ClientWalletProvider";
 
+
 const defaultUrl = process.env.VERCEL_URL
   ? `https://${process.env.VERCEL_URL}`
   : "http://localhost:3000";
@@ -12,6 +13,8 @@ export const metadata = {
   description: "The fastest way to build apps with Next.js and Supabase",
 };
 
+
+
 export default function RootLayout({
   children,
 }: {
@@ -21,10 +24,12 @@ export default function RootLayout({
     <html lang="en" className={GeistSans.className}>
       <body className="bg-background text-foreground">
         <main className="w-screen h-screen">
-          <ClientWalletProvider>
+          
+                <ClientWalletProvider>
 
-            {children}
-          </ClientWalletProvider>
+                  {children}
+                </ClientWalletProvider>
+              
         </main>
       </body>
     </html>

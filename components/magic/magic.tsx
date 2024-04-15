@@ -1,4 +1,7 @@
+"use client"
+
 import AuthModal from "../solana/auth-modal-one";
+import { ConnectButton } from '@rainbow-me/rainbowkit';
 
 const Magic = () => {
     return (
@@ -10,7 +13,14 @@ const Magic = () => {
                 </article>
             </div>
 
-            <AuthModal />
+            <div className="my-2">
+                <AuthModal />
+            </div>
+            
+
+            <div className="my-2">
+                <ConnectButton />
+            </div>
         </div>
     )
 }
