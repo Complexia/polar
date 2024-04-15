@@ -21,8 +21,8 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-    <html lang="en" className={GeistSans.className}>
-      <body className="bg-background text-foreground">
+    <html lang="en" data-theme="synthwave" className={GeistSans.className}>
+      <body className=" ">
         <main className="w-screen h-screen">
           
                 <ClientWalletProvider>

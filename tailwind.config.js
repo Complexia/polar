@@ -16,5 +16,9 @@ module.exports = {
       },
     },
   },
+  daisyui: {
+    themes: ["light", "dark", "cupcake", "synthwave", "retro", "cyberpunk"],
+  },
+  
   plugins: [require("daisyui"),require('@tailwindcss/typography')], 
 };
