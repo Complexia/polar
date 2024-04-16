@@ -1,0 +1,1 @@
+<h1 align="center">A web3 auth provider for everything</h1>
