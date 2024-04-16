@@ -8,15 +8,22 @@ import { Avatar, AvatarImage } from "@/registry/new-york/ui/avatar";
 import { v4 as uuidv4 } from 'uuid'
 import { set } from "react-hook-form";
 
+
 const RegisterProject = () => {
 
 
 
     const handleCreateProject = async () => {
+        const node_crypto = require('crypto');
         //save to filecoin, mint an nft that contains the id/name/address 
         // of the project to the user's wallet
+        // jwt secret generated and stored on filecoin, encrypted
+        // jwt secret is per user
         console.log("Creating project on filecoin")
         let project_id = uuidv4();
+        let jwt_secret = node_crypto.randomBytes(32).toString('base64');
+        
+        setProjectId(project_id);
         let project = {
             project_id,
             project_name,
@@ -37,6 +44,7 @@ const RegisterProject = () => {
 
     const [finished, setFinished] = useState(false);
     const [secret, setSecret] = useState("");
+    const [project_id, setProjectId] = useState("");
     const [loading, setLoading] = useState(false);
     const [project_name, setProjectName] = useState("");
     const [scope, setScope] = useState("");
@@ -85,8 +93,9 @@ const RegisterProject = () => {
 
             {finished && (
                 <div className="py-4 flex flex-col">
-                    <span className="label-text pb-1">Copy the project secret.</span>
-                    <code>{finished ? secret : ""}</code>
+                    <span className="label-text pb-1">Copy the project Id secret.</span>
+                    <span>Project Id: <code>{finished ? project_id : ""}</code></span>
+                    <span>Project Secret: <code>{finished ? secret : ""}</code></span>
 
                 </div>
 
