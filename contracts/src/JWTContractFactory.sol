@@ -16,6 +16,7 @@ contract JWTContractFactory is Ownable {
     uint256 private createJwtFee;
     mapping(uint256 => JWTContract) private jwtcontracts;
     uint256 private _ownerIncome;
+    string private encrypted_jwt_secret;
 
      /**
      * @dev Constructor function to set the createJwtFee.
@@ -37,7 +38,9 @@ contract JWTContractFactory is Ownable {
         string memory _uri,
         uint256 _mintCount,
         uint256 _tokenPrice,
-        bool _allowMint
+        bool _allowMint,
+        string memory _encrypted_jwt_secret
+
     ) public {
         // require(msg.value >= createJwtFee, "Insufficient fee");
         uint256 jwt_id = currentTokenId;
@@ -47,7 +50,8 @@ contract JWTContractFactory is Ownable {
             _tokenPrice,
             _allowMint,
             msg.sender,
-            address(this)
+            address(this),
+            encrypted_jwt_secret = _encrypted_jwt_secret
         );
         jwtcontracts[jwt_id] = newJwt;
         currentTokenId++;
@@ -87,6 +91,12 @@ contract JWTContractFactory is Ownable {
         return createJwtFee;
     }
 
+    // GETTER FUNCTIONS
+
+    function getJwtSecret() public view returns (string memory) {
+        return encrypted_jwt_secret;
+    }
+
     /**
      * @dev Returns the token URI for a given jwt contract.
      * @param jwt_id The ID of the jwt contract.
@@ -105,6 +115,17 @@ contract JWTContractFactory is Ownable {
         jwtcontracts[jwt_id].setURI(_newUri);
         emit TokenURIUpdated(jwt_id, _newUri);
     }
+
+    //  /**
+    //  * @dev Set a new jwt secret 
+    //  * @param jwt_id The ID of the jwt.
+    //  * @param _encrypted_jwt_secret The new URI.
+    //  */
+    // function setJwtSecret(uint256 jwt_id, string memory _encrypted_jwt_secret) public {
+    //     jwtcontracts[jwt_id].setJwtSecret(_encrypted_jwt_secret);
+    //     emit TokenURIUpdated(jwt_id, _encrypted_jwt_secret);
+        
+    // }
 
     /**
      * @dev Set a custom price for a jwt's token.
@@ -132,9 +153,9 @@ contract JWTContractFactory is Ownable {
      * @param jwt_id The ID of the jwt.
      * @param to The recipient of the minted token.
      */
-   function mint(uint256 jwt_id, address to) public payable {
+   function mint(uint256 jwt_id, address to, string memory _encrypted_jwt_secret) public payable {
     (bool success, bytes memory data) = address(jwtcontracts[jwt_id]).call{value: msg.value}(
-        abi.encodeWithSignature("mint(address)", to)
+        abi.encodeWithSignature("mint(address, encrypted_jwt_secret)", to, _encrypted_jwt_secret)
     );
 
     if (success) {

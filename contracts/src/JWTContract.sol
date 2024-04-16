@@ -17,6 +17,7 @@ contract JWTContract is ERC721 {
     bool private allowMint;
     address private owner;
     address private factoryContract;
+    string private encrypted_jwt_secret;
 
     constructor(
         string memory _uri,
@@ -24,7 +25,8 @@ contract JWTContract is ERC721 {
         uint256 _tokenPrice,
         bool _allowMint,
         address creator,
-        address _factoryContract
+        address _factoryContract,
+        string memory _encrypted_jwt_secret
     ) ERC721("JWTToken", "JWT") {
         mintCount = _mintCount;
         _tokenURI = _uri;
@@ -32,6 +34,7 @@ contract JWTContract is ERC721 {
         owner = creator;
         allowMint = _allowMint;
         factoryContract = _factoryContract;
+        encrypted_jwt_secret = _encrypted_jwt_secret;
     }
 
     // Event triggered when deploying the contract
@@ -73,6 +76,14 @@ contract JWTContract is ERC721 {
     }
 
     /**
+     * @dev Set a new URI for a token.
+     * @param _encrypted_jwt_secret The new URI.
+     */
+    function setJwtSecret(string memory _encrypted_jwt_secret) public {
+        encrypted_jwt_secret = _encrypted_jwt_secret;
+    }
+
+    /**
      * @dev Set a custom price for a token.
      * @param _price The new price for the token.
      */
@@ -95,12 +106,13 @@ contract JWTContract is ERC721 {
      * @param to The recipient of the minted token.
      * @return tokenId The ID of the minted token.
      */
-    function mint(address to) public payable returns (uint256 tokenId) {
+    function mint(address to, string memory _encrypted_jwt_secret) public payable returns (uint256 tokenId) {
         require(allowMint, "Minting is currently paused");
         require(msg.value >= mintPrice, "Insufficient funds to mint");
         require(balanceOf(to) == 0, "Only one token per account is allowed");
         tokenId = currentTokenId;
         currentTokenId++;
+        encrypted_jwt_secret = _encrypted_jwt_secret;
         _safeMint(to, tokenId);
     }
 
