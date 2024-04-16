@@ -1,1 +1,1 @@
-<h1 align="center">A web3 auth provider for everything</h1>
+<h1>A web3 auth provider for everything</h1>
