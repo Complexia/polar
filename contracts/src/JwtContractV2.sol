@@ -13,16 +13,13 @@ contract JWTContract is ERC721, Ownable {
     uint256 public currentTokenId;
     string private encrypted_jwt_secret;
     bool private allowMint;
-    address private owner;
     
     constructor(
         string memory _encrypted_jwt_secret,
-        bool _allowMint,
-        address creator
+        bool _allowMint
         
     ) ERC721("JWTToken", "JWT") Ownable(msg.sender) {
         encrypted_jwt_secret = _encrypted_jwt_secret;
-        owner = creator;
         allowMint = _allowMint;
     }
 
