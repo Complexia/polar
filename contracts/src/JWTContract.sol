@@ -5,8 +5,8 @@ import "openzeppelin-contracts/contracts/token/ERC721/ERC721.sol";
 import "./Counter.sol";
 
 /**
- * @title QSoundSong
- * @dev A contract representing a QSoundSong NFT (ERC721 token).
+ * @title JWTContract
+ * @dev A contract representing a JWT secret (encrypted) as an NFT 
  */
 
 contract JWTContract is ERC721 {
