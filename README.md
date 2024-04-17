@@ -4,4 +4,4 @@ Simply create a project on Polar, import AuthButton, and have your users authent
 
 <h2>Contract Deployments</h2>
 JWT Secret Contract -> 
-    Ethereum Sepolia: https://sepolia.etherscan.io/address/0x9a2f446aa23a0de2db4bcc8d0cd8a82c8a2f876b
+    Ethereum Sepolia: https://sepolia.etherscan.io/address/0x48Dd84f5227aaBBEB37D9E05754Bc04E82a9E92a
