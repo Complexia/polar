@@ -14,29 +14,29 @@ function Profile() {
   }
 
 
-const handleGenerateJwt = async () => {
-    // Generate a JWT secret for auth purposes
-    console.log('Generate a JWT secret for auth purposes')
+// const handleGenerateJwt = async () => {
+//     // Generate a JWT secret for auth purposes
+//     console.log('Generate a JWT secret for auth purposes')
 
-    // Save to filecoin, mint an NFT that contains the id/name/address
-    // of the project to the user's wallet
-    const node_crypto = require('crypto');
-    let jwt_secret = node_crypto.randomBytes(32).toString('base64');
-    console.log(jwt_secret)
-}
+//     // Save to filecoin, mint an NFT that contains the id/name/address
+//     // of the project to the user's wallet
+//     const node_crypto = require('crypto');
+//     let jwt_secret = node_crypto.randomBytes(32).toString('base64');
+//     console.log(jwt_secret)
+// }
 const Info = () => {
     const { address } = useAccount()
     return (
         <div>
             <div className="flex flex-col">
                 <article className="prose">
-                    <h3>User information and button to save to filecoin</h3>
+                    <h3>Your info</h3>
 
                 </article>
 
                 <div>{address}</div>
 
-                <button className="btn" onClick={() => handleGenerateJwt()}>Generate a JWT secret for auth purposes</button>
+                <button className="btn">Save info</button>
             </div>
             
             

@@ -13,9 +13,7 @@ const Magic = () => {
                 </article>
             </div>
 
-            <div className="my-2"> 
-                <AuthModal />
-            </div>
+            
             
 
             <div className="my-2">
