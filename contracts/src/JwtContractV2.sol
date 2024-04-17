@@ -5,21 +5,19 @@ import "openzeppelin-contracts/contracts/token/ERC721/ERC721.sol";
 import "openzeppelin-contracts/contracts/access/Ownable.sol";
 
 /**
- * @title JWTContract
+ * @title JwtContractV2
  * @dev A contract representing a JWT secret (encrypted) as an NFT
  */
 
-contract JWTContract is ERC721, Ownable {
+contract JwtContractV2 is ERC721, Ownable {
     uint256 public currentTokenId;
     string private encrypted_jwt_secret;
     bool private allowMint;
     
     constructor(
-        string memory _encrypted_jwt_secret,
         bool _allowMint
         
     ) ERC721("JWTToken", "JWT") Ownable(msg.sender) {
-        encrypted_jwt_secret = _encrypted_jwt_secret;
         allowMint = _allowMint;
     }
 
