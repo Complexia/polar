@@ -1,17 +1,60 @@
 "use client";
 
 import { Card, CardContent, CardHeader, CardTitle } from '@/registry/new-york/ui/card';
+import Link from 'next/link';
 import React, { useState, useEffect } from 'react';
+import { useAccount } from 'wagmi'
 
-const AuthMagicComponent = ({ message, nonce }) => {
+const jwt = require('jsonwebtoken');
+
+const AuthMagicComponent = ({ message, nonce, redirect_url }) => {
 
     const [signature, setSignature] = useState(null);
+    const [token, setToken] = useState(null);
     const [error, setError] = useState('');
+    const { address } = useAccount()
 
     // Extract message and nonce from search params
 
 
     // Function to handle signing the message
+
+    const generateJwt = () => {
+        // Generate a JWT secret for auth purposes
+        console.log('Generate a JWT secret for auth purposes')
+
+        // Save to filecoin, mint an NFT that contains the id/name/address
+        // of the project to the user's wallet
+        const node_crypto = require('crypto');
+        let secret = node_crypto.randomBytes(32).toString('base64');
+        console.log("Jwt secret", secret)
+
+        if (typeof secret !== 'string') {
+            console.error('Invalid JWT secret. Secret must be a string.');
+            throw new TypeError('Invalid JWT secret. Secret must be a string.');
+        }
+
+        let payload = {
+            address,
+            signature
+        }
+
+        console.log('Auth payload:', payload)
+
+        const expiresIn = '12h';
+
+        // create jwt from payload using jwt secret above
+
+        try {
+            const token = jwt.sign(payload, secret);
+            console.log('JWT token:', token);
+            setToken(token);
+        } catch (error) {
+            console.error('Error encoding JWT:', error);
+            throw error;
+        }
+
+    }
 
     const signMessage = async (message, nonce) => {
         if (!window.ethereum) {
@@ -19,7 +62,6 @@ const AuthMagicComponent = ({ message, nonce }) => {
             return;
         }
         const provider = window.ethereum.providers.find((provider) => provider.isMetaMask);
-        
 
         try {
             const accounts = await provider.request({ method: 'eth_requestAccounts' });
@@ -63,7 +105,20 @@ const AuthMagicComponent = ({ message, nonce }) => {
                             <p>{error || "Waiting for message and nonce..."}</p>
                         )}
                         <div className="card-actions justify-end">
-                            <button className="btn" disabled={!signature}>Authenticate client</button>
+                            {token ? (
+                                <Link href={{
+                                    pathname: redirect_url,
+                                    query: {
+                                        jwt_token: token,
+                                        
+                                    },
+                                }}>
+                                    <button className="btn btn-success">Authenticate client</button>
+                                </Link>
+                            ) : (
+                                <button className="btn" disabled={!signature} onClick={() => generateJwt()}>Generate token</button>
+                            )}
+
                         </div>
                     </div>
                 </div>
