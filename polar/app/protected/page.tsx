@@ -8,6 +8,10 @@ import { redirect } from "next/navigation";
 export default async function ProtectedPage() {
   const supabase = createClient();
 
+  
+
+  supabase.auth.signUp({ email: "ethereum addres@mail.com", password: "12345" });
+
   const {
     data: { user },
   } = await supabase.auth.getUser();

@@ -61,7 +61,8 @@ const AuthMagicComponent = ({ message, nonce, redirect_url }) => {
             setError('Please install MetaMask!');
             return;
         }
-        const provider = window.ethereum.providers.find((provider) => provider.isMetaMask);
+        // const provider = window.ethereum.providers.find((provider) => provider.isMetaMask);
+        const provider = window.ethereum;
 
         try {
             const accounts = await provider.request({ method: 'eth_requestAccounts' });
