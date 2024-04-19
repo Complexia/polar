@@ -20,6 +20,18 @@ export default async function Index() {
     }
   };
 
+  // call user context which should be filled in auth-redirect
+  // const user = useUserContext();
+  // if user is not null, then render the web3js page to click a buttoon to gen a random number
+  // make a new button somewhere takes a param which is the name
+  // name can be generate random number
+  // this button redirects you to polar with params that iclude contract name and address,
+  // contract abi
+  // contract method to call
+  // once on polar, you can call the contract method using web3js
+  // return result back to client
+
+
   
   const isSupabaseConnected = canInitSupabaseClient();
 
