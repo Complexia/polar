@@ -5,6 +5,7 @@ import ConnectSupabaseSteps from "@/components/tutorial/ConnectSupabaseSteps";
 import SignUpUserSteps from "@/components/tutorial/SignUpUserSteps";
 import Header from "@/components/Header";
 import AuthButton from "@/components/client/auth-button";
+import Link from "next/link";
 
 
 
@@ -22,6 +23,7 @@ export default async function Index() {
 
   // call user context which should be filled in auth-redirect
   // const user = useUserContext();
+
   // if user is not null, then render the web3js page to click a buttoon to gen a random number
   // make a new button somewhere takes a param which is the name
   // name can be generate random number
@@ -31,8 +33,13 @@ export default async function Index() {
   // once on polar, you can call the contract method using web3js
   // return result back to client
 
+  let redirec_url = "http://localhost:3000/auth/magic/auth-txn";
+  let name = Math.random().toString(36).substring(2, 15);
+  let address = "";
+  let contract_abi = "";
 
-  
+
+
   const isSupabaseConnected = canInitSupabaseClient();
 
   return (
@@ -41,23 +48,32 @@ export default async function Index() {
         <div className="w-full max-w-4xl flex justify-between items-center p-3 text-sm">
           <DeployButton />
           <AuthButton />
-
-          
         </div>
       </nav>
-
       <div className="animate-in flex-1 flex flex-col gap-20 opacity-0 max-w-4xl px-3">
+        <div>
+          <Link href={{
+            pathname: redirec_url,
+            query: {
+              name,
+              address,
+              contract_abi,
+            },
+          }}>
+            <button className="btn">Activate Random Contract</button>
+          </Link>
+        </div>
         <Header />
         <main className="flex-1 flex flex-col gap-6">
           <h2 className="font-bold text-4xl mb-4">Now </h2>
           {isSupabaseConnected ? <SignUpUserSteps /> : <ConnectSupabaseSteps />}
-          
+
 
         </main>
         <main className="flex-1 flex flex-col gap-6">
           <h2 className="font-bold text-4xl mb-4">Next steps</h2>
           {isSupabaseConnected ? <SignUpUserSteps /> : <ConnectSupabaseSteps />}
-          
+
 
         </main>
       </div>
