@@ -10,7 +10,9 @@ import TxnButton from "@/components/web3Button";
 
 
 
-export default async function Index() {
+export default async function Index(context) {
+    let response = context.searchParams["response"]
+
     const client_redirect_url = "http://localhost:3000/test/application";
     const canInitSupabaseClient = () => {
         // This function is just for the interactive tutorial.
@@ -41,16 +43,16 @@ export default async function Index() {
     let address = "0xA36432F7B12f160F685717c4Ab12EB883a682810";
     const contract_abi = [
         {
-        outputs: [
-            {
-            internalType: "uint256",
-            name: "randomNo",
-            type: "uint256",
-            },
-        ],
-        name: "generateRandomNumber",
-        stateMutability: "nonpayable",
-        type: "function",
+            outputs: [
+                {
+                    internalType: "uint256",
+                    name: "randomNo",
+                    type: "uint256",
+                },
+            ],
+            name: "generateRandomNumber",
+            stateMutability: "nonpayable",
+            type: "function",
         },
     ] as const;
 
@@ -70,38 +72,28 @@ export default async function Index() {
             </nav>
             <div className="animate-in flex-1 flex flex-col gap-20 opacity-0 max-w-4xl px-3">
 
-                <Header />
-                <main className="flex-1 flex flex-col gap-6">
-                    <h2 className="font-bold text-4xl mb-4">Now </h2>
-                    {isSupabaseConnected ? <SignUpUserSteps /> : <ConnectSupabaseSteps />}
 
 
-                </main>
                 <main className="flex-1 flex flex-col gap-6">
                     <h2 className="font-bold text-4xl mb-4">web3 steps</h2>
-                    <div>
-                       <TxnButton  /> 
+                    <div className="flex flex-row space-x-4">
+                        <div>
+                            <TxnButton />
+                        </div>
+                        <div className="mt-2">
+                            {response ? (
+                                <div>{response}</div>
+                            ) : (
+                                <div>Waiting for bananas</div>
+                            )}
+
+                        </div>
                     </div>
-
-
-
 
                 </main>
             </div>
 
-            <footer className="w-full border-t border-t-foreground/10 p-8 flex justify-center text-center text-xs">
-                <p>
-                    Powered by{" "}
-                    <a
-                        href="https://supabase.com/?utm_source=create-next-app&utm_medium=template&utm_term=nextjs"
-                        target="_blank"
-                        className="font-bold hover:underline"
-                        rel="noreferrer"
-                    >
-                        Supabase
-                    </a>
-                </p>
-            </footer>
+
         </div>
     );
 }
