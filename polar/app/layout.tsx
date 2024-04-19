@@ -29,7 +29,6 @@ export default function RootLayout({
 
           <ClientWalletProvider>
             <ContextProvider>
-
               {children}
             </ContextProvider>
           </ClientWalletProvider>

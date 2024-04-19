@@ -1,5 +1,8 @@
 {
-  "private": true,
+  "name": "polar-auth-complexia",
+  "version": "0.1.0",
+  "description": "Polar is a web3 application that allows users to create, manage, and share their own NFT collections.",
+  "author": "Complexia",
   "scripts": {
     "dev": "next dev",
     "build": "next build",
@@ -48,8 +51,10 @@
     "crypto": "^1.0.1",
     "daisyui": "latest",
     "embla-carousel-react": "^8.0.2",
+    "eth-sig-util": "^3.0.1",
     "geist": "^1.2.1",
     "jsonwebtoken": "8.5.1",
+    "jwt-decode": "^4.0.0",
     "next": "latest",
     "next-themes": "^0.3.0",
     "pino-pretty": "^11.0.0",
@@ -66,7 +71,8 @@
     "typescript": "5.3.3",
     "vaul": "^0.9.0",
     "viem": "^2.9.17",
-    "wagmi": "^2.5.19"
+    "wagmi": "^2.5.19",
+    "web3": "^4.8.0"
   },
   "devDependencies": {
     "@types/node": "20.11.5",

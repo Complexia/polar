@@ -56,7 +56,8 @@ const AuthMagicComponent = ({ message, nonce, redirect_url }) => {
 
     }
 
-    const signMessage = async (message, nonce) => {
+    const signMessage = async (message, nonce, address) => {
+        let account = address
         if (!window.ethereum) {
             setError('Please install MetaMask!');
             return;
@@ -65,12 +66,20 @@ const AuthMagicComponent = ({ message, nonce, redirect_url }) => {
         const provider = window.ethereum;
 
         try {
-            const accounts = await provider.request({ method: 'eth_requestAccounts' });
+            
             //const accounts = await provider.send("eth_requestAccounts", []);
-            const account = accounts[0];
+            
             const fullMessage = `${message}${nonce}`;
-            const params = [fullMessage, account];
+            
+            let message_sign = {
+                message: fullMessage,
+            }
+
+            
+            const params = [account, fullMessage];
             const method = 'personal_sign';
+
+            console.log('account:', account);
 
             const signature = await provider.request({ method, params, from: account });
             setSignature(signature);
@@ -92,7 +101,7 @@ const AuthMagicComponent = ({ message, nonce, redirect_url }) => {
                         <p>Message: {message}</p>
                         <p>Nonce: {nonce}</p>
                         <div className="card-actions justify-end">
-                            <button className="btn" onClick={() => signMessage(message, nonce)}>Create signature</button>
+                            <button className="btn" onClick={() => signMessage(message, nonce, address)}>Create signature</button>
                         </div>
                     </div>
                 </div>
