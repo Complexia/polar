@@ -1,6 +1,8 @@
 import { GeistSans } from "geist/font/sans";
 import "./globals.css";
 import ClientWalletProvider from "@/components/solana/contexts/ClientWalletProvider";
+import UserContext from "@/components/context-provider";
+import ContextProvider from "@/components/context-provider";
 
 
 const defaultUrl = process.env.VERCEL_URL
@@ -24,14 +26,17 @@ export default function RootLayout({
     <html lang="en" data-theme="synthwave" className={GeistSans.className}>
       <body className=" ">
         <main className="w-screen h-screen">
-          
-                <ClientWalletProvider>
 
-                  {children}
-                </ClientWalletProvider>
-              
+          <ClientWalletProvider>
+            <ContextProvider>
+
+              {children}
+            </ContextProvider>
+          </ClientWalletProvider>
+
+
         </main>
       </body>
-    </html>
+    </html >
   );
 }

@@ -2,6 +2,7 @@
 
 import AuthModal from "../solana/auth-modal-one";
 import { useAccount, useEnsName } from 'wagmi'
+import { useUserContext } from "../user-context";
 
 function Profile() {
     const { address } = useAccount()
@@ -24,7 +25,16 @@ function Profile() {
 //     let jwt_secret = node_crypto.randomBytes(32).toString('base64');
 //     console.log(jwt_secret)
 // }
+
+
+// fetch ProfileContract NFT from wallet and see info
 const Info = () => {
+
+    // hardcoded user info that should be got from NFT
+    // save this info to context
+    const userInfo: any = useUserContext();
+    console.log(userInfo)
+
     const { address } = useAccount()
     return (
         <div>
