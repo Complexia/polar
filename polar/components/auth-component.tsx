@@ -4,6 +4,7 @@ import { Card, CardContent, CardHeader, CardTitle } from '@/registry/new-york/ui
 import Link from 'next/link';
 import React, { useState, useEffect } from 'react';
 import { useAccount } from 'wagmi'
+import { useUserContext } from './user-context';
 
 const jwt = require('jsonwebtoken');
 
@@ -13,6 +14,8 @@ const AuthMagicComponent = ({ message, nonce, redirect_url }) => {
     const [token, setToken] = useState(null);
     const [error, setError] = useState('');
     const { address } = useAccount()
+
+    const user_data = useUserContext();
 
     // Extract message and nonce from search params
 
@@ -36,7 +39,8 @@ const AuthMagicComponent = ({ message, nonce, redirect_url }) => {
 
         let payload = {
             address,
-            signature
+            signature,
+            user_data
         }
 
         console.log('Auth payload:', payload)

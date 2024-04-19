@@ -47,18 +47,20 @@ const TestAuthClient = ({ token }) => {
     console.log("addressR", recoveredAddr)
     console.log("addressO", address)
 
+    let user_data = {
+        address: address,
+        data: decoded.user_data,
+    }
+
     if (!(recoveredAddr.toLowerCase().trim() == address.toString().toLowerCase().trim())) { 
         console.log('Signature verification failed');
     }
     else {
         console.log('Signature verified');
+        localStorage.setItem('user', JSON.stringify( user_data ));
         redirect("/test/application")
     }
 
-
-    // let encoded_message = encode_defunct(bytes(message, encoding='utf8'))
-    // let recoveredAddress = web3.eth.accounts[0].recover_message(message , signature)
-    // console.log("recoveredAddress", recoveredAddress)
 
 
     console.log("decoded", decoded);

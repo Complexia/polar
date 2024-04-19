@@ -71,9 +71,14 @@ export default async function Index() {
 
         </main>
         <main className="flex-1 flex flex-col gap-6">
+<<<<<<< HEAD
           <h2 className="font-bold text-4xl mb-4">Next steps</h2>
           {isSupabaseConnected ? <SignUpUserSteps /> : <ConnectSupabaseSteps />}
 
+=======
+          
+          
+>>>>>>> 4481ba4a000d5b805a95593e54926d239b282f7e
 
         </main>
       </div>
