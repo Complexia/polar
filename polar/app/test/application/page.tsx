@@ -9,6 +9,7 @@ import Link from "next/link";
 import TxnButton from "@/components/web3Button";
 import ClientNav from "@/components/client/client-nav";
 import SucessModal from "@/components/client/sucess-modal";
+import ClientNavAuth from "@/components/client/client-nav-auth";
 
 
 
@@ -71,7 +72,7 @@ export default async function Index(context) {
                 <div className="flex-1">
                     <a className="btn btn-ghost text-xl">Web3Shopify</a>
                 </div>
-
+{/* 
                 {user ? (
                     <ClientNav />
                 ) :
@@ -80,7 +81,9 @@ export default async function Index(context) {
                             <AuthButton />
                         </div>
                     </div>)
-                }
+                } */}
+
+                <ClientNavAuth/>
 
             </div>
             {/* <nav className="w-full flex justify-center border-b border-b-foreground/10 h-16">
