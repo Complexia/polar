@@ -10,7 +10,7 @@ const TxnButton = () => {
     // generate message
     // let message = Math.random().toString(36).substring(7);
     // let nonce = Math.random().toString(36).substring(7);
-    
+
     const [message, setMessage] = useState(null);
     const [nonce, setNonce] = useState(null);
 
@@ -21,7 +21,7 @@ const TxnButton = () => {
         if (typeof window !== "undefined") {
             let polarData = localStorage.getItem('polar');
             // Check if 'polar' data already exists in localStorage
-            if (!polarData) {
+            if (!polarData || Object.keys(polarData).length === 0) {
                 // Generate message and nonce if 'polar' doesn't exist
                 const newMessage = Math.random().toString(36).substring(7);
                 const newNonce = Math.random().toString(36).substring(7);

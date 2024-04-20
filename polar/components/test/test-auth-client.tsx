@@ -52,13 +52,23 @@ const TestAuthClient = ({ token }) => {
         data: decoded.user_data,
     }
 
-    if (!(recoveredAddr.toLowerCase().trim() == address.toString().toLowerCase().trim())) { 
+    if (!(recoveredAddr.toLowerCase().trim() == address.toString().toLowerCase().trim())) {
         console.log('Signature verification failed');
     }
     else {
         console.log('Signature verified');
-        localStorage.setItem('user', JSON.stringify( user_data ));
-        redirect("/test/application")
+        localStorage.setItem('user', JSON.stringify(user_data));
+
+        // Construct the URL with query parameters
+        const params = new URLSearchParams();
+        const base64True = btoa("true");
+        const encodedUserData = encodeURIComponent(base64True);
+        params.set('user', encodedUserData);
+
+        // Convert the query object into a query string and perform the redirect
+        const queryString = params.toString();
+        const url = `/test/application?${queryString}`;
+        redirect(url)
     }
 
 
@@ -68,7 +78,7 @@ const TestAuthClient = ({ token }) => {
         <div className="flex flex-col items-center justify-center h-screen">
             <h1>Auth Client</h1>
             {recoveredAddr ?
-                (<div>Recovered Address: {recoveredAddr}</div>):( <div>Recovering address...</div>)
+                (<div>Recovered Address: {recoveredAddr}</div>) : (<div>Recovering address...</div>)
             }
         </div>
     )
