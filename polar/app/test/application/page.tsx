@@ -184,9 +184,7 @@ export default async function Index(context) {
 
                     </div>
 
-
-
-                    <div className="flex flex-row space-x-4">
+                    {/* <div className="flex flex-row space-x-4">
                         <div>
                             <TxnButton />
                         </div>
@@ -197,7 +195,8 @@ export default async function Index(context) {
                                 <div>Waiting for bananas</div>
                             )}
                         </div>
-                    </div>
+                    </div> */}
+
                 </main>
             </div>
 
