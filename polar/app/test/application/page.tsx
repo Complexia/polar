@@ -10,13 +10,33 @@ import TxnButton from "@/components/web3Button";
 import ClientNav from "@/components/client/client-nav";
 import SucessModal from "@/components/client/sucess-modal";
 import ClientNavAuth from "@/components/client/client-nav-auth";
+import { jwtDecode } from "jwt-decode";
 
 
 
 export default async function Index(context) {
     let response = context.searchParams["response"];
     let openModal = false;
-    let user = context.searchParams["user"];
+    // let user = context.searchParams["user"];
+
+    let jwt = context.searchParams["jwt"];
+    let decoded = null;
+    if (jwt && typeof jwt === 'string' && jwt.trim() !== '') {
+        try {
+            decoded = jwtDecode(jwt);
+            console.log("Decoded JWT:", decoded);
+        } catch (error) {
+            console.error("Failed to decode JWT:", error);
+        }
+    } else {
+        console.log("No valid JWT available.");
+    }
+    // let token = JSON.stringify(jwt) ? JSON.stringify(jwt)  : null;
+    // console.log("debug 4",token);
+    // let decoded: any = jwtDecode(jwt) ? jwtDecode(jwt) : null;
+    // console.log("debug 5 :", decoded);
+
+
     const client_redirect_url = "http://localhost:3000/test/application";
     const canInitSupabaseClient = () => {
         // This function is just for the interactive tutorial.
@@ -72,7 +92,7 @@ export default async function Index(context) {
                 <div className="flex-1">
                     <a className="btn btn-ghost text-xl">Web3Shopify</a>
                 </div>
-{/* 
+                {/* 
                 {user ? (
                     <ClientNav />
                 ) :
@@ -83,7 +103,7 @@ export default async function Index(context) {
                     </div>)
                 } */}
 
-                <ClientNavAuth/>
+                <ClientNavAuth decode={decoded} />
 
             </div>
             {/* <nav className="w-full flex justify-center border-b border-b-foreground/10 h-16">

@@ -9,7 +9,7 @@ import { useUserContext } from './user-context';
 const jwt = require('jsonwebtoken');
 
 const AuthMagicComponent = ({ message, nonce, redirect_url }) => {
-
+    console.log("debug here 0");
     const [signature, setSignature] = useState(null);
     const [token, setToken] = useState(null);
     const [error, setError] = useState('');
@@ -71,7 +71,7 @@ const AuthMagicComponent = ({ message, nonce, redirect_url }) => {
 
         try {
             
-            //const accounts = await provider.send("eth_requestAccounts", []);
+            const accounts = await provider.send("eth_requestAccounts", []);
             
             const fullMessage = `${message}${nonce}`;
             

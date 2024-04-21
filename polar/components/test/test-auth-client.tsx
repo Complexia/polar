@@ -18,7 +18,9 @@ import { redirect } from "next/navigation";
 
 
 const TestAuthClient = ({ token }) => {
-    // set a provider in the sepolia testnet using node rpc url
+
+    const node_crypto = require('crypto');
+    const jwt = require('jsonwebtoken');
     const web3 = new Web3("https://rpc.sepolia.org")
     let decoded: any = jwtDecode(token);
     // const [recoveredAddress, setRecoveredAddress] = useState(null)
@@ -52,23 +54,44 @@ const TestAuthClient = ({ token }) => {
         data: decoded.user_data,
     }
 
+    // identify user
     if (!(recoveredAddr.toLowerCase().trim() == address.toString().toLowerCase().trim())) {
         console.log('Signature verification failed');
     }
     else {
-        console.log('Signature verified');
-        localStorage.setItem('user', JSON.stringify(user_data));
+        try {
+            console.log('Signature verified');
+            // localStorage.setItem('user', JSON.stringify(user_data));
 
-        // Construct the URL with query parameters
-        const params = new URLSearchParams();
-        const base64True = btoa("true");
-        const encodedUserData = encodeURIComponent(base64True);
-        params.set('user', encodedUserData);
+            // if correct user -> send user_data to /test/application
 
-        // Convert the query object into a query string and perform the redirect
-        const queryString = params.toString();
-        const url = `/test/application?${queryString}`;
-        redirect(url)
+            let payload = JSON.stringify(user_data);
+            console.log("this is user_data : ", payload);
+            // generate jwt_token include user_data
+            let secret = node_crypto.randomBytes(32).toString('base64');
+            console.log("Jwt secret", secret)
+            if (typeof secret !== 'string') {
+                console.error('Invalid JWT secret. Secret must be a string.');
+                throw new TypeError('Invalid JWT secret. Secret must be a string.');
+            }
+            const expiresIn = '12h';
+            // create jwt from payload using jwt secret above
+            const token = jwt.sign(payload, secret);
+            console.log('JWT token:', token);
+            // Construct the URL with query parameters
+            const params = new URLSearchParams();
+            const encodedUserData = encodeURIComponent(token);
+            params.set('jwt', encodedUserData);
+
+            // Convert the query object into a query string and perform the redirect
+            const queryString = params.toString();
+            const url = `/test/application?${queryString}`;
+            redirect(url)
+
+        } catch (error) {
+            console.error('Error encoding JWT:', error);
+            throw error;
+        }
     }
 
 
