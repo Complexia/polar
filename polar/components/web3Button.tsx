@@ -3,11 +3,13 @@
 import { createClient } from "@/utils/supabase/server";
 import Link from "next/link";
 import { redirect } from "next/navigation";
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
+import AuthButton from "@/components/client/auth-button";
 
 export default function TxnButton() {
 
   const [user, setUser] = useState(null);
+  const modalRef = useRef(null);
   useEffect(() => {
     const user = localStorage.getItem("user");
     setUser(user);
@@ -38,6 +40,23 @@ export default function TxnButton() {
   const abi = JSON.stringify(contract_abi);
   const contract_method = "generateRandomNumber";
 
+  // const openModal = () => {
+  //   setModal(true);
+  //   console.log("opening modal");
+  // };
+
+  const openModal = () => {
+    if (modalRef.current) {
+      modalRef.current.showModal();
+    }
+  };
+
+  const closeModal = () => {
+    if (modalRef.current) {
+      modalRef.current.close();
+    }
+  };
+
 
   return (
     <div>
@@ -52,10 +71,25 @@ export default function TxnButton() {
             client_redirect_url
           },
         }}>
-          <button className="btn">Activate Random Button</button>
+          <button className="btn btn-primary">Buy Now</button>
         </Link>
       ) : (
-        <h1>authenticate with polar first</h1>
+        <div>
+          <button className="btn btn-primary" onClick={openModal}>Buy Now</button>
+          <div>{/* Open the modal using document.getElementById('ID').showModal() method */}
+            <dialog ref={modalRef} className="modal">
+              <div className="modal-box">
+                <form method="dialog">
+                  {/* if there is a button in form, it will close the modal */}
+                  <button className="btn btn-sm btn-circle btn-ghost absolute right-2 top-2" onClick={closeModal}>✕</button>
+                </form>
+                <h3 className="font-bold text-lg">Authentication Required!</h3>
+                <p className="py-4">Please Connect Your Wallet</p>
+                <AuthButton/>
+              </div>
+            </dialog>
+          </div>
+        </div>
       )}
 
     </div>

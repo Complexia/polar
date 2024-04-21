@@ -13,11 +13,18 @@ const AuthMagic = (context) => {
     console.log("message", message)
     console.log("nonce", nonce)
     console.log("redirect_url", redirect_url)
-    
+
     // sign message and nonce
-    
+
     return (
-       <AuthMagicComponent message={message} nonce={nonce} redirect_url={redirect_url}/> 
+        <div className="mockup-browser border bg-base-300">
+            <div className="mockup-browser-toolbar">
+                <div className="input">https://polar-auth.io</div>
+            </div>
+            <div className="bg-base-200">
+                <AuthMagicComponent message={message} nonce={nonce} redirect_url={redirect_url} />
+            </div>
+        </div>
     )
 }
 
