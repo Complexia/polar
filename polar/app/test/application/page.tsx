@@ -37,7 +37,7 @@ export default async function Index(context) {
     // console.log("debug 5 :", decoded);
 
 
-    const client_redirect_url = "http://localhost:3000/test/application";
+    // const client_redirect_url = "http://localhost:3000/test/application";
     const canInitSupabaseClient = () => {
         // This function is just for the interactive tutorial.
         // Feel free to remove it once you have Supabase connected.
@@ -61,7 +61,7 @@ export default async function Index(context) {
     // once on polar, you can call the contract method using web3js
     // return result back to client
 
-    let redirec_url = "http://localhost:3000/auth/magic/auth-txn";
+    // let redirec_url = "http://localhost:3000/auth/magic/auth-txn";
     let name = Math.random().toString(36).substring(2, 15);
 
     let address = "0xA36432F7B12f160F685717c4Ab12EB883a682810";

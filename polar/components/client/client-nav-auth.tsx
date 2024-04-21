@@ -8,6 +8,13 @@ import AuthButton from "@/components/client/auth-button";
 import ClientNav from "@/components/client/client-nav";
 
 const ClientNavAuth = (decoded) => {
+    // First, check if user data exists in localStorage
+    if (typeof window !== "undefined") {
+        const userData = localStorage.getItem('user');
+        if (userData) {
+            return <ClientNav />;
+        }
+    }
 
     console.log("debug 5", decoded.decode);
     if (!decoded.decode || Object.keys(decoded.decode).length === 0) {

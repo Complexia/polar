@@ -15,10 +15,9 @@ export default function TxnButton() {
     setUser(user);
 
   }, []);
-
-
-  let redirect_url = "http://localhost:3000/auth/magic/auth-txn";
-  let client_redirect_url = "http://localhost:3000/test/application";
+  let domain = process.env.NEXT_PUBLIC_DOMAIN || "http://localhost:3000";
+  let redirect_url = `${domain}/auth/magic/auth-txn`;
+  let client_redirect_url = `${domain}/test/application`;
   let name = Math.random().toString(36).substring(2, 15);
 
   let address = "0xA36432F7B12f160F685717c4Ab12EB883a682810";
@@ -85,7 +84,7 @@ export default function TxnButton() {
                 </form>
                 <h3 className="font-bold text-lg">Authentication Required!</h3>
                 <p className="py-4">Please Connect Your Wallet</p>
-                <AuthButton/>
+                <AuthButton />
               </div>
             </dialog>
           </div>
